@@ -25,6 +25,16 @@ admin.initializeApp({
 const app = express();
 const PORT = process.env.PORT || 8080;
 
+app.use(function (req, res, next) {
+  // Redirect to secure site with HTTPS enabled. We can't enable HTTPS on
+  // www.emeraldcityresourceguide.com because it's hosted on Heroku's free tier.
+  if (req.hostname === 'www.emeraldcityresourceguide.org') {
+    res.redirect(301, 'https://emerald-city-guide.herokuapp.com/');
+  } else {
+    next();
+  }
+});
+
 // application middleware
 app.use(express.static("./public"));
 app.use(
