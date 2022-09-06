@@ -5,6 +5,7 @@ services:
   - type: web # valid values: https://render.com/docs/yaml-spec#type
     name: emerald-city-guide
     env: node # valid values: https://render.com/docs/yaml-spec#environment
+    buildCommand: npm install
     startCommand: node server.js
     plan: free # optional; defaults to starter
     numInstances: 1
